@@ -1,6 +1,7 @@
 package resources;
 
 import com.codahale.metrics.annotation.Timed;
+import filetransfer.FileZillaClient;
 import io.dropwizard.jersey.caching.CacheControl;
 import views.SayHello;
 
@@ -21,6 +22,8 @@ public class SayHelloResource {
 
     @GET
     public SayHello sayHello() {
-        return new SayHello("greetings" , "zolika");
+        FileZillaClient fzc = new FileZillaClient();
+
+        return new SayHello("greetings" , fzc.getStuff());
     }
 }
