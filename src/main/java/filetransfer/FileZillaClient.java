@@ -69,9 +69,9 @@ public class FileZillaClient {
 
 
             //retrieve file from remote location
-            String remoteFile2 = "/Inbox/HelloZoli.txt";
-            StringBuilder sb = new StringBuilder();
-            InputStream inputStream = ftpClient.retrieveFileStream(remoteFile2);
+            String remoteFile = "/Inbox/HelloZoli.txt";
+
+            InputStream inputStream = ftpClient.retrieveFileStream(remoteFile);
 
 
             str = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
@@ -80,7 +80,7 @@ public class FileZillaClient {
 
             boolean success = ftpClient.completePendingCommand();
             if (success) {
-                System.out.println("File #2 has been downloaded successfully.");
+                System.out.println("File  has been downloaded successfully.");
             }
 
             inputStream.close();
