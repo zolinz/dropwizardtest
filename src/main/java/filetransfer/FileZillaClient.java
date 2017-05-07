@@ -14,11 +14,48 @@ import java.nio.charset.StandardCharsets;
  */
 public class FileZillaClient {
 
-    public String getStuff(){
-        String server = "127.0.0.1";
+    private String server;
+    private int port;
+    private String user;
+    private String password;
+
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFileFromFTPServer(){
+       /* String server = "127.0.0.1";
         int port = 21;
         String user = "zoli";
-        String pass = "zoli";
+        String pass = "zoli";*/
 
         String str = null;
 
@@ -26,14 +63,13 @@ public class FileZillaClient {
         try {
 
             ftpClient.connect(server, port);
-            ftpClient.login(user, pass);
+            ftpClient.login(user, password);
             ftpClient.enterLocalPassiveMode();
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
 
-            // APPROACH #2: using InputStream retrieveFileStream(String)
+            //retrieve file from remote location
             String remoteFile2 = "/Inbox/HelloZoli.txt";
-            File downloadFile2 = new File("D:/Downloads/song.mp3");
             StringBuilder sb = new StringBuilder();
             InputStream inputStream = ftpClient.retrieveFileStream(remoteFile2);
 

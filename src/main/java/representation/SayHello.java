@@ -1,4 +1,4 @@
-package views;
+package representation;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

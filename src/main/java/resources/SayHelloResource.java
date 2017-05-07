@@ -1,17 +1,14 @@
 package resources;
 
-import com.codahale.metrics.annotation.Timed;
 import filetransfer.FileZillaClient;
-import io.dropwizard.jersey.caching.CacheControl;
-import views.SayHello;
+import filetransfer.MySftpClient;
+import representation.SayHello;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
 
 /**
  * Created by Zoli on 6/05/2017.
@@ -20,10 +17,23 @@ import java.util.concurrent.TimeUnit;
 @Produces(MediaType.APPLICATION_JSON)
 public class SayHelloResource {
 
-    @GET
-    public SayHello sayHello() {
-        FileZillaClient fzc = new FileZillaClient();
+    FileZillaClient fileZillaClient;
 
-        return new SayHello("greetings" , fzc.getStuff());
+    MySftpClient sftpClient;
+
+    public SayHelloResource(String server, int port, String user, String password){
+        fileZillaClient = new FileZillaClient();
+        fileZillaClient.setServer(server);
+        fileZillaClient.setPort(port);
+        fileZillaClient.setUser(user);
+        fileZillaClient.setPassword(password);
+
+        sftpClient = new MySftpClient();
+    }
+
+    @GET
+    public SayHello sayHello() throws IOException{
+       // return new SayHello("greetings" , fileZillaClient.getFileFromFTPServer());
+        return new SayHello("greetings" , sftpClient.getFile());
     }
 }
